@@ -1,0 +1,44 @@
+<div class="p-3 border border-secondary rounded-4">
+  <%= render @post %>
+  <div id="reactions-wraper" class="">
+    <div class="mt-2 d-flex gap-3">
+      <p>
+        <%= @post.count_with_reaction_type('like') %>
+        <i class="fa-regular fa-thumbs-up" style="color: #164258;"></i>
+      </p>
+      <p>
+        <%= @post.count_with_reaction_type('dislike') %>
+        <i class="fa-regular fa-thumbs-down" style="color: #164258;"></i>
+      </p>
+    </div>
+    <% if user_signed_in? %>
+      <div class="d-flex gap-4">
+        <% Reaction.reaction_type.each do |reaction_type| %>
+          <%= button_to "#{reaction_type}", user_reaction_path(post_id: @post.id, reaction_type: reaction_type), method: :post, class: "btn btn-sm btn-outline-primary" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <div class="d-flex gap-4 align-items-center mt-5 justify-content-center">
+    <%= link_to "Back to posts", posts_path, class:"btn btn-sm btn-outline-secondary m-0" %>
+    <% if current_user && (current_user.admin? || current_user == @post.user) %>
+      <%= link_to "Edit this post", edit_post_path(@post), class:"btn btn-sm btn-outline-warning m-0" %>
+      <%= button_to "Destroy this post", @post, method: :delete, class: "btn btn-sm btn-outline-danger mt-2" %>
+    <% end %>
+  </div>
+</div>
+<div id="comments-section">
+  <h4 class="display-6 my-3">Comments</h4>
+  <% @comments.each do |comment| %>
+    <div class="border border-secondary rounded-4 p-3 my-2">
+      <p class="fst-italic fs-5">
+        <%= comment.author == "whatshername@senkutech.cl" ? "Anonimo" : comment.author %>:
+      </p>
+      <p class="fs-6"><%= simple_format(comment.content) %></p>
+      <% if current_user && (current_user.admin? || current_user.email == comment.author) %>
+        <%= link_to 'Edit', edit_post_comment_path(@post, comment), class:"btn btn-sm btn-outline-warning" %>
+      <% end %>
+    </div>
+  <% end %>
+  <%= render 'comments/form' %>
+</div>
