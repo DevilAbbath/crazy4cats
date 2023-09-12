@@ -43,17 +43,21 @@ Vista principal de la página:
 
 ![Vista principal](/public/1.png)
 
-Si deseas editar una publicación, no te preocupes:
+Log in Page:
 
-![Vista visitante](/public/visitors.png)
+![Vista visitante](/public/2.png)
 
-Agrega comentarios de manera sencilla:
+Vista como administrador:
 
-![Vista admin](/public/adminView.png)
+![Vista admin](/public/3.png)
 
-Muestra los comentarios:
+Editor de una publicacion:
 
-![loguea o crea una cuenta](/public/login.png)
+![loguea o crea una cuenta](/public/4.png)
+
+Mostrador de tus reacciones:
+
+![loguea o crea una cuenta](/public/5.png)
 
 ## Let's get Started 🚀
 
